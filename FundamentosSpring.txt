@@ -1,0 +1,9 @@
+Spring 
+1. librerias
+2. web.xml
+3. controller --> llamado desde el navegador
+4. archivos xml.	
+	applicationContext ->configurado en web.xml
+	generar beans --> genera un objeto del controlador
+5. publicar el controller
+	dispacher-servlet
