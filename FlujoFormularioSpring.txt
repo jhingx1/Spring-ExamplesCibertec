@@ -1,0 +1,14 @@
+Tomando como ejemplo navega02
+Es un formulario Basico:
+	nombre y apellido
+
+Para este caso creamos una clase con estos dos atributos(nombre y apellido).
+
+Y en el controlador se crea una objeto de la clase que se creo : Data.
+Luego le pasamos al modelo el objeto data, para luego usarlo en el formulario.
+
+En el formulario(index) lo usamos con el comando commandName = data -> Que es el objeto.
+En el formulario lo dirigimos hacia el controlador con el parametro SAL.
+
+Y ya el controlador los manda hacia el jsp result.
+
