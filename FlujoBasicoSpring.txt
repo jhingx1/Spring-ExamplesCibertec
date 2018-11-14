@@ -1,0 +1,31 @@
+Usando como ejemplo a navega01
+
+1.- Segun el web.xml nos dirigimos primero hacia el redirect.jsp este contiene:
+	<% response.sendRedirect("index.htm"); %>
+    El cual contiene el index.htm.
+    En el dispacher existe un key con el id index.htm que nos indica que nos va a
+    redirigir hacia la pagina de index.
+
+2.- En la pagina index, exiten varios enlaces, cada uno con sus respectivas rutas.
+	Mensaje de Bienvenida -> href="navega.htm?accion=inicio"
+	Ver LocalName -> href="navega.htm?accion=avisa"
+	Mensaje de Despedida -> href="navega.htm?accion=fin"
+
+nota:En el applicationContext y en el dispacher se esta definiendo la ubicacion y el
+nombre del controlador.
+
+3.- Para cada uno de los casos estamos pasando parametros hacia el controlador.
+	Notar que la url es navega.html que es el key que le proporcionamos en el dispacher
+	Enviamos 1 parametro por cada link  inicio,avisa y fin.
+
+4.- Estos link nos redirigen hacia el controlador en el controlador los metodos tienen alieas
+  	que tienen los mismo nombres de los parametros que se estan pasando.
+	@RequestMapping(params = "accion=inicio")
+		Nos redirige hacia el jsp destino, pero con un diferente mensaje
+	@RequestMapping(params = "accion=avisa")
+		Nos redirige hacia el jsp destino, pero con un diferente mensaje
+	@RequestMapping(params = "accion=fin")
+		Nos redirige hacia el jsp destino, pero con un diferente mensaje
+
+Termina.
+	
