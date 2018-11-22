@@ -30,7 +30,7 @@ public class FormularioController {
 
     @RequestMapping(params = "accion=salida")
     public ModelAndView fin(@ModelAttribute Usuario usuario) {
-        return new ModelAndView("salida", "usuario", usuario);
+        return new ModelAndView("salida", "usuario", usuario);//usuario es el que colocara en el formulario
     }
 
 }
