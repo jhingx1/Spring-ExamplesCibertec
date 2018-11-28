@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- datos de Hibernate tomados por Spring -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+        <property name="mappingResources">
+            <list>
+                <value>hibernate/domain/Categorias.hbm.xml</value>
+                <value>hibernate/domain/Distritos.hbm.xml</value>
+                <value>hibernate/domain/Restaurantes.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- DAOs, se inyecta el sesseionFactory que esta arriba -->
+    <bean class="dao.impl.DaoCategoriasImpl" id="daoCategorias">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean class="dao.impl.DaoDistritosImpl" id="daoDistritos">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean class="dao.impl.DaoRestaurantesImpl" id="daoRestaurantes">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- ManagedBeans -->
+    <bean class="web.managedbean.ManagedBeanCategorias" id="mbCategorias">
+        <property name="daoCategorias" ref="daoCategorias"/>
+    </bean>
+    
+    <bean class="web.managedbean.ManagedBeanRestaurantes" id="mbRestaurantes">
+        <property name="daoRestaurantes" ref="daoRestaurantes"/>
+        <property name="daoCategorias" ref="daoCategorias"/>
+        <property name="daoDistritos" ref="daoDistritos"/>
+    </bean>
+</beans>
+
