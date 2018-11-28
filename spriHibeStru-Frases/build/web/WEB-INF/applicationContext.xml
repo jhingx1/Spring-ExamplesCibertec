@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- datos de conexion de Hibernate tomados por Spring -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+        <property name="mappingResources">
+            <list>
+                <value>hibernate/domain/Autores.hbm.xml</value>
+                <value>hibernate/domain/Frases.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- DAOs -->
+    <bean class="dao.impl.DaoAutoresImpl" id="daoAutores">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean class="dao.impl.DaoFrasesImpl" id="daoFrases">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Actions -->
+    <bean class="web.action.AutoresAction" id="actionAutores">
+        <property name="daoAutores" ref="daoAutores"/>
+    </bean>
+    
+    <bean class="web.action.FrasesAction" id="actionFrases">
+        <property name="daoFrases" ref="daoFrases"/>
+        <property name="daoAutores" ref="daoAutores"/>
+    </bean>
+</beans>
+
