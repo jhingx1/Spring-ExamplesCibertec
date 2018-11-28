@@ -1,0 +1,82 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" extends="struts-default" namespace="/">
+        
+        <!-- categorias -->
+        <action name="categoriasQry" class="web.action.ActionCategorias"
+                method="categoriasQry">
+            <result name="success">/view/categoriasQry.jsp</result>
+        </action>
+        
+        <action name="categoriasIns" class="web.action.ActionCategorias"
+                method="categoriasIns">
+            <result name="success">/view/categoriasIns.jsp</result>
+        </action>
+        
+        <action name="categoriasIns2" class="web.action.ActionCategorias"
+                method="categoriasIns2">
+            <result name="input">/view/categoriasIns.jsp</result>
+            <result name="success">/view/categoriasQry.jsp</result>
+            <result name="error">/view/categoriasIns.jsp</result>
+        </action>
+        
+        <action name="categoriasDel" class="web.action.ActionCategorias"
+                method="categoriasDel">
+            <result name="success">/view/categoriasQry.jsp</result>
+        </action>
+        
+        <action name="categoriasGet" class="web.action.ActionCategorias"
+                method="categoriasGet">
+            <result name="success">/view/categoriasUpd.jsp</result>
+            <result name="error">/view/categoriasQry.jsp</result>
+        </action>
+        
+        <action name="categoriasUpd" class="web.action.ActionCategorias"
+                method="categoriasUpd">
+            <result name="input">/view/categoriasUpd.jsp</result>
+            <result name="success">/view/categoriasQry.jsp</result>
+            <result name="error">/view/categoriasUpd.jsp</result>
+        </action>
+        
+        <!-- restaurantes -->
+        <action name="restaurantesQry" class="web.action.ActionRestaurantes"
+                method="restaurantesQry">
+            <result name="success">/view/restaurantesQry.jsp</result>
+        </action>
+        
+        <action name="restaurantesIns" class="web.action.ActionRestaurantes"
+                method="restaurantesIns">
+            <result name="success">/view/restaurantesIns.jsp</result>
+        </action>
+        
+        <action name="restaurantesIns2" class="web.action.ActionRestaurantes"
+                method="restaurantesIns2">
+            <result name="input">/view/restaurantesIns.jsp</result>
+            <result name="success">/view/restaurantesQry.jsp</result>
+            <result name="error">/view/restaurantesIns.jsp</result>
+        </action>
+        
+        <action name="restaurantesDel" class="web.action.ActionRestaurantes"
+                method="restaurantesDel">
+            <result name="success">/view/restaurantesQry.jsp</result>
+        </action>
+        
+        <action name="restaurantesGet" class="web.action.ActionRestaurantes"
+                method="restaurantesGet">
+            <result name="success">/view/restaurantesUpd.jsp</result>
+            <result name="error">/view/restaurantesQry.jsp</result>
+        </action>
+        
+        <action name="restaurantesUpd" class="web.action.ActionRestaurantes"
+                method="restaurantesUpd">
+            <result name="input">/view/restaurantesUpd.jsp</result>
+            <result name="success">/view/restaurantesQry.jsp</result>
+            <result name="error">/view/restaurantesUpd.jsp</result>
+        </action>
+        
+    </package>
+</struts>
+
