@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/table.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-2.1.4.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/table.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/restaurantes.js"/>
+    </h:head>
+    <h:body>
+        <table class="parainfo" style="margin: auto;width: 600px">
+            <thead>
+                <tr>
+                    <th class="crud">
+                        <a class="qry" href="#" onclick="categoriasQry();" 
+                           title="Lista de Categorías"><span></span></a>
+                    </th>
+                    <td>Categoría</td>
+                    <td>Restaurante</td>
+                    <td>Distrito</td>
+                    <td>Dirección</td>
+                    <th class="crud">
+                        <a class="ins" href="#" onclick="restaurantesIns();" 
+                           title="Nuevo Registro"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="del" href="#" onclick="restaurantesDel();"
+                           title="Retirar Registros"><span></span></a>
+                    </th>
+                    <th class="crud">
+                        <a class="upd" href="#" onclick="restaurantesUpd();"
+                           title="Actualizar Registro"><span></span></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="r" items="#{mbRestaurantes.restaurantesQry}">
+                    <tr>
+                        <td colspan="2">#{r.categoria}</td>
+                        <td>#{r.restaurante}</td>
+                        <td>#{r.distrito}</td>
+                        <td colspan="2">#{r.direccion}</td>
+                        <th>
+                            <input type="checkbox" name="idrestaurante_del" 
+                                   value="#{r.idrestaurante}"/>
+                        </th>
+                        <th>
+                            <input type="radio" name="idrestaurante_upd" 
+                                   value="#{r.idrestaurante}"/>
+                        </th>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+
+        <!-- mensajes del servidor -->
+        <h:outputText value="#{mbRestaurantes.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+
+        <!-- mensajes lado del cliente -->
+        <div style="display: none">
+            <div id="dlg_message"><p id="message"></p></div>
+        </div>
+
+        <!-- retirar restaurantes -->
+        <h:form id="form_del">
+            <h:inputHidden id="ids" value="#{mbRestaurantes.ids}"/>
+            <h:commandButton 
+                id="restaurantesDel" style="display: none;" type="submit"
+                action="#{mbRestaurantes.restaurantesDel()}"/>
+        </h:form>
+
+        <!-- actualizar restaurantes -->
+        <h:form id="form_get">
+            <h:inputHidden 
+                id="idrestaurante" 
+                value="#{mbRestaurantes.restaurantes.idrestaurante}"/>
+            <h:commandButton 
+                id="restaurantesGet" style="display: none;" type="submit"
+                action="#{mbRestaurantes.restaurantesGet()}"/>
+        </h:form>
+    </h:body>
+</html>
+
