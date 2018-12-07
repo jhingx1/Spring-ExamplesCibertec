@@ -1,14 +1,17 @@
 DROP TABLE IF EXISTS proveedores;
 DROP TABLE IF EXISTS clientes;
-DROP TABLE IF EXISTS departamentos;
 DROP TABLE IF EXISTS distritos;
+DROP TABLE IF EXISTS departamentos;
+
 
 -- crear tablas
-CREATE TABLE departamentos(
-    iddepartamento  int(11) NOT NULL AUTO_INCREMENT,
-    departamento    varchar(50) NOT NULL,
-    PRIMARY KEY (iddepartamento)
-) ENGINE=InnoDB AUTO_INCREMENT=1338 DEFAULT CHARSET=utf8;
+CREATE TABLE clientes (
+    idcliente int(11) NOT NULL AUTO_INCREMENT,
+    nombrecliente varchar(100) NOT NULL,
+    ruc   varchar(100) NOT NULL,
+    PRIMARY KEY (idcliente),
+    UNIQUE KEY IDX_clientes_1 (nombrecliente)	
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE distritos (
     iddistrito  int(11) NOT NULL AUTO_INCREMENT,
@@ -16,40 +19,35 @@ CREATE TABLE distritos (
     PRIMARY KEY (iddistrito)		
 ) ENGINE=InnoDB AUTO_INCREMENT=1338 DEFAULT CHARSET=utf8;
 
-CREATE TABLE clientes (
-    idcliente int(11) NOT NULL AUTO_INCREMENT,
-    nombrecliente varchar(100) NOT NULL,
-    ruc   varchar(100) NOT NULL,
-    iddepartamento int(11) NOT NULL,
-    PRIMARY KEY (idcliente),
-    UNIQUE KEY IDX_clientes_1 (nombrecliente)
-	
-	KEY FK_clientes_1 (iddepartamento),
-	
-	CONSTRAINT FK_clientes_1 FOREIGN KEY (iddepartamento) 
-        REFERENCES departamentos (iddepartamento) 
-        ON DELETE CASCADE ON UPDATE CASCADE
-		
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE departamentos(
+    iddepartamento  int(11) NOT NULL AUTO_INCREMENT,
+    departamento    varchar(50) NOT NULL,
+    PRIMARY KEY (iddepartamento)
+) ENGINE=InnoDB AUTO_INCREMENT=1338 DEFAULT CHARSET=utf8;
 
 CREATE TABLE proveedores (
     idproveedor   int(11) NOT NULL AUTO_INCREMENT,
     idcliente     int(11) NOT NULL,
     razonsocial     varchar(200) NOT NULL,
     direccion       varchar(200) NOT NULL,    
-    iddistrito      int(11) NOT NULL,		
+    iddistrito      int(11) NOT NULL,   
+    iddepartamento      int(11) NOT NULL,
 	
     PRIMARY KEY (idproveedor),
     UNIQUE KEY IDX_proveedores_4 (razonsocial),
     KEY FK_proveedores_1 (idcliente),    
-	KEY FK_proveedores_2 (iddistrito),
+    KEY FK_proveedores_2 (iddistrito),
+    KEY FK_proveedores_3 (iddepartamento),
 	
     CONSTRAINT FK_proveedores_1 FOREIGN KEY (idcliente) 
         REFERENCES clientes (idcliente) 
         ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_proveedores_2 FOREIGN KEY (iddistrito) 
+    CONSTRAINT FK_proveedores_2 FOREIGN KEY (iddistrito) 
         REFERENCES distritos (iddistrito) 
-        ON DELETE CASCADE ON UPDATE CASCADE		
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT FK_proveedores_3 FOREIGN KEY (iddepartamento) 
+        REFERENCES departamentos (iddepartamento) 
+        ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- insert a departamentos
@@ -125,17 +123,17 @@ INSERT INTO distritos(distrito) VALUES('Villa el Salvador');
 INSERT INTO distritos(distrito) VALUES('Villa María del Triunfo');
 
 -- insert a clientes
-INSERT INTO clientes(nombrecliente,ruc,iddepartamento) VALUES('Esmeralda Corp','10156497963',5);
-INSERT INTO clientes(nombrecliente,ruc,iddepartamento) VALUES('Soraya SAC','10156497965',5);
-INSERT INTO clientes(nombrecliente,ruc,iddepartamento) VALUES('Aliprofesco','10156497968',5);
-INSERT INTO clientes(nombrecliente,ruc,iddepartamento) VALUES('Viento Solar','10156497966',5);
+INSERT INTO clientes(nombrecliente,ruc) VALUES('Esmeralda Corp','10156497963');
+INSERT INTO clientes(nombrecliente,ruc) VALUES('Soraya SAC','10156497965');
+INSERT INTO clientes(nombrecliente,ruc) VALUES('Aliprofesco','10156497968');
+INSERT INTO clientes(nombrecliente,ruc) VALUES('Viento Solar','10156497966');
 
 -- insert a proveedores
-INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito) 
-    VALUES(1, 'Makro SAC', 'Panamericana Sur km 18.5', 1359);
-INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito) 
-    VALUES(2, 'Embarcadero 41', 'Av. La Mar 456', 1359);
-INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito) 
-    VALUES(3, 'Embarcadero 41', 'Av. La Mar 456', 1359);
-INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito) 
-    VALUES(4, 'Embarcadero 41', 'Av. La Mar 456', 1359);	
+INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito,iddepartamento) 
+    VALUES(1, 'Makro SAC', 'Panamericana Sur km 18.5', 1359,1338);
+INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito,iddepartamento) 
+    VALUES(2, 'Embarcadero 41', 'Av. La Mar 456', 1359,1341);
+INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito,iddepartamento) 
+    VALUES(3, 'ESAC Frigorifico', 'Av. La Mar 456', 1359,1343);
+INSERT INTO proveedores(idcliente, razonsocial, direccion, iddistrito,iddepartamento) 
+    VALUES(4, 'San Fernando', 'Av. La Mar 456', 1359,1347);
