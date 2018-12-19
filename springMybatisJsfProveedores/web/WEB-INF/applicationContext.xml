@@ -28,47 +28,17 @@
         <!-- inyectando a los daos - los manage beans, son el reemplazo de los controllers de spring. -->
         <property name="dataSource" ref="dataSource" />
     </bean>
-    
-    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
-          id="categoriasMapper">
-        <property name="mapperInterface" value="mybatis.CategoriasMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-    </bean>
-    
+     
     <bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
           id="distritosMapper">
         <property name="mapperInterface" value="mybatis.DistritosMapper" />
         <property name="sqlSessionFactory" ref="sqlSessionFactory" />
     </bean>
     
-    <bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
-          id="restaurantesMapper">
-        <property name="mapperInterface" value="mybatis.RestaurantesMapper" />
-        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-    </bean>
-    
-    <bean class="dao.impl.DaoCategoriasImpl" id="daoCategorias">
-        <property name="categoriasMapper" ref="categoriasMapper"/>
-    </bean>
-    
     <bean class="dao.impl.DaoDistritosImpl" id="daoDistritos">
         <property name="distritosMapper" ref="distritosMapper"/>
     </bean>
     
-    <bean class="dao.impl.DaoRestaurantesImpl" id="daoRestaurantes">
-        <property name="restaurantesMapper" ref="restaurantesMapper"/>
-    </bean>
-    
-    <bean class="web.managedbean.ManagedBeanCategorias" id="mbCategorias">
-        <property name="daoCategorias" ref="daoCategorias"/>
-    </bean>
-    
-    <bean class="web.managedbean.ManagedBeanRestaurantes" id="mbRestaurantes">
-        <property name="daoRestaurantes" ref="daoRestaurantes"/>
-        <property name="daoCategorias" ref="daoCategorias"/>
-        <property name="daoDistritos" ref="daoDistritos"/>
-    </bean>
-
     <!-- XML para proveedores-->
     <!-- Los mapper-->
     <bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
