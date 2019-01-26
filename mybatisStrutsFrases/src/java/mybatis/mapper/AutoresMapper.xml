@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+            "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+                        
+                            <!-- interface java -->
+<mapper namespace="mybatis.mapper.AutoresMapper"> 
+
+    <resultMap id="autores" type="dto.Autores">
+        <id column="idautor" property="idautor" jdbcType="INTEGER"/>
+        <result column="autor" property="autor" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>
+
