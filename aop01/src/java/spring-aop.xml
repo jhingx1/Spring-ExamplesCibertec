@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <!-- clase a ser afectada -->
+    <bean class="com.areas.impl.AreasImpl" id="areasImpl"/>
+    
+    <!-- clase donde se encuentra nuestro advice -->
+    <bean class="advice.AreaBeforeAdvice" id="areaBefore"/>
+    <bean class="advice.AreaAfterAdvice" id="areaAfter"/>
+    
+    <bean class="advice.AreaBeforeAdviceCuadrado" id="areaBeforeCuadrado"/>
+    <bean class="advice.AreaAfterAdviceCuadrado" id="areaAfterCuadrado"/>
+    
+    <!-- metodos a ser afectados -->
+    <bean class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">        
+        <property name="pattern" value=".*cuadrado.*"/>
+    </bean>
+    
+    <!-- interceptores -->
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxy">
+        <property name="proxyInterfaces" value="com.areas.Areas"/>
+        <property name="target" ref="areasImpl"/>
+        
+        <property name="interceptorNames">
+            <list>                
+                <value>areaBefore</value>
+                <value>areaAfter</value>
+                <value>areaBeforeCuadrado</value>
+                <value>areaAfterCuadrado</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+

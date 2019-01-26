@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <!-- clase a ser afectada -->
+    <bean class="com.impl.AuditoriaImpl" id="auditoriaImpl"/>
+    
+    <!-- clase donde se encuentra nuestro advice -->
+    <bean class="advice.AutoriaBeforeAdvice" id="autoriaBefore"/>
+    <bean class="advice.AutoriaAfterAdvice" id="autoriaAfter"/>
+    
+    <!-- metodos a ser afectados -->
+    <bean class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="pattern" value=".*suceso.*"/>
+    </bean>
+    
+    <!-- interceptores -->
+    <bean class="org.springframework.aop.framework.ProxyFactoryBean" id="proxy">
+        <property name="proxyInterfaces" value="com.Auditoria"/>
+        <property name="target" ref="auditoriaImpl"/>
+        
+        <property name="interceptorNames">
+            <list>
+                <value>autoriaBefore</value>
+                <value>autoriaAfter</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+
