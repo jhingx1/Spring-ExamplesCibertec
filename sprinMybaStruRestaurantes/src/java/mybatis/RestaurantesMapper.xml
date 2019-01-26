@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+             "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+                        
+<mapper namespace="mybatis.RestaurantesMapper"> <!-- interface java -->
+
+    <resultMap id="restaurantes" type="dto.Restaurantes">
+        <id column="idrestaurante" property="idrestaurante" jdbcType="INTEGER"/>
+        <result column="idcategoria" property="idcategoria" jdbcType="INTEGER"/>
+        <result column="restaurante" property="restaurante" jdbcType="VARCHAR"/>
+        <result column="direccion" property="direccion" jdbcType="VARCHAR"/>
+        <result column="iddistrito" property="iddistrito" jdbcType="INTEGER"/>
+    </resultMap>
+</mapper>
+
