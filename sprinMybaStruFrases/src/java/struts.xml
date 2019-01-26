@@ -1,0 +1,83 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" extends="struts-default" namespace="/">
+        
+        <!-- autores -->
+        <action name="autoresQry" class="web.action.ActionAutores"
+                method="autoresQry">
+            <result name="success">/view/autoresQry.jsp</result>
+        </action>
+        
+        <action name="autoresIns" class="web.action.ActionAutores"
+                method="autoresIns">
+            <result name="success">/view/autoresIns.jsp</result>
+        </action>
+        
+        <action name="autoresIns2" class="web.action.ActionAutores"
+                method="autoresIns2">
+            <result name="input">/view/autoresIns.jsp</result>
+            <result name="success">/view/autoresQry.jsp</result>
+            <result name="error">/view/autoresIns.jsp</result>
+        </action>
+        
+        <action name="autoresDel" class="web.action.ActionAutores"
+                method="autoresDel">
+            <result name="success">/view/autoresQry.jsp</result>
+        </action>
+        
+        <action name="autoresGet" class="web.action.ActionAutores"
+                method="autoresGet">
+            <result name="success">/view/autoresUpd.jsp</result>
+            <result name="error">/view/autoresQry.jsp</result>
+        </action>
+        
+        <action name="autoresUpd" class="web.action.ActionAutores"
+                method="autoresUpd">
+            <result name="input">/view/autoresUpd.jsp</result>
+            <result name="success">/view/autoresQry.jsp</result>
+            <result name="error">/view/autoresUpd.jsp</result>
+        </action>
+        
+        <!-- frases -->
+        <action name="frasesQry" class="web.action.ActionFrases"
+                method="frasesQry">
+            <result name="success">/view/frasesQry.jsp</result>
+        </action>
+        
+        <action name="frasesIns" class="web.action.ActionFrases"
+                method="frasesIns">
+            <result name="success">/view/frasesIns.jsp</result>
+        </action>
+        
+        <action name="frasesIns2" class="web.action.ActionFrases"
+                method="frasesIns2">
+            <result name="input">/view/frasesIns.jsp</result>
+            <result name="success">/view/frasesQry.jsp</result>
+            <result name="error">/view/frasesIns.jsp</result>
+        </action>
+        
+        <action name="frasesDel" class="web.action.ActionFrases"
+                method="frasesDel">
+            <result name="success">/view/frasesQry.jsp</result>
+        </action>
+        
+        <action name="frasesGet" class="web.action.ActionFrases"
+                method="frasesGet">
+            <result name="success">/view/frasesUpd.jsp</result>
+            <result name="error">/view/frasesQry.jsp</result>
+        </action>
+        
+        <action name="frasesUpd" class="web.action.ActionFrases"
+                method="frasesUpd">
+            <result name="input">/view/frasesUpd.jsp</result>
+            <result name="success">/view/frasesQry.jsp</result>
+            <result name="error">/view/frasesUpd.jsp</result>
+        </action>
+                
+        
+    </package>
+</struts>
+
