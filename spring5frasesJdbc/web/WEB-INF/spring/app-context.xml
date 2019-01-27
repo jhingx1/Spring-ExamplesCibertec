@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+                http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+    <!-- para etiquetas del proyecto -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value = "msg/messages" />
+    </bean>
+    
+    <!-- datos de conexion -->
+    <context:property-placeholder location="/WEB-INF/jdbc.properties"/>
+    
+    <!-- obteniendo dataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>     
+    
+    <!-- inyectando dataSource en los jdbcTemplate que se usaran en los DAOs -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <!-- paquete donde estaran los DAOs -->
+    <context:component-scan base-package="dao.impl" />
+</beans>
