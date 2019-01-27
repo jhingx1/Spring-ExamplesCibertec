@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis.AutosMapper" >
+    <resultMap id="autos" type="dto.Autos" >
+        <id column="idauto" property="idauto" jdbcType="INTEGER" />
+        <result column="modelo" property="modelo" jdbcType="VARCHAR" />
+        <result column="precioxdia" property="precioxdia" jdbcType="DOUBLE" />
+        <result column="alquilado" property="alquilado" jdbcType="CHAR" />
+    </resultMap>
+  
+</mapper>

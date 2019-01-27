@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>parainformaticos.com</title>
+        <h:outputStylesheet name="jq/jquery-ui.min.css"/>
+        <h:outputStylesheet name="css/main.css"/>
+        <h:outputStylesheet name="parainfo/a.css"/>
+        <h:outputStylesheet name="parainfo/form.css"/>
+        <h:outputStylesheet name="parainfo/message.css"/>
+
+        <h:outputScript name="jq/jquery-2.1.4.min.js"/>
+        <h:outputScript name="jq/jquery-ui.min.js"/>
+        <h:outputScript name="parainfo/form.js"/>
+        <h:outputScript name="parainfo/message.js"/>
+
+        <h:outputScript name="js/alquileres.js"/>
+        
+         <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+        </script>
+    </h:head>
+    <h:body>
+        <h:form class="parainfo" style="margin: auto;display: table">
+            <fieldset>
+                <legend>Nuevo Alquiler</legend>
+
+                <h:panelGrid columns="2" class="tabla">    
+                    <h:outputLabel for="idauto" value="Auto" />
+                    <h:selectOneMenu value="#{mbAlquileres.alquileres.idauto}"
+                                     id="idauto" style="width: 310px">
+                        <f:selectItems value="#{mbAlquileres.autosCbo}" var="c"
+                                       itemValue="#{c.idauto}"
+                                       itemLabel="#{c.modelo}"/>
+                    </h:selectOneMenu>
+                    
+                     <h:outputLabel for="alquiler_ini" value="Fecha Inicial"/>
+                     <p:calendar value="#{mbAlquileres.alquileres.alquiler_ini}"  locale="es" required="true" 
+                               requiredMessage="* Ingrese alquiler_ini"
+                            showOn="button" pattern="dd/MM/yyyy" /> 
+                     
+                     <h:outputLabel for="alquiler_fin" value="Fecha Final"/>
+                     <p:calendar value="#{mbAlquileres.alquileres.alquiler_fin}"  locale="es" required="true" 
+                               requiredMessage="* Ingrese alquiler_fin"
+                            showOn="button" pattern="dd/MM/yyyy" /> 
+
+                    <h:outputLabel for="cliente" value="Nom. Cliente" />
+                    <h:inputText value="#{mbAlquileres.alquileres.cliente}"
+                                 id="cliente" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese cliente"
+                                 validatorMessage="* Entre [5, 60] caracteres">
+                        <f:validateLength minimum="5" maximum="60"/>
+                    </h:inputText>
+                    
+                    <h:outputLabel for="dni" value="DNI" />
+                    <h:inputText value="#{mbAlquileres.alquileres.dni}"
+                                 id="dni" style="width: 300px" required="true"
+                                 requiredMessage="* Ingrese dni"
+                                 validatorMessage="* Ingrese 8 caracteres">                        
+                        <f:validateLength minimum="8" maximum="8"/>
+                    </h:inputText>
+                    
+                </h:panelGrid> 
+                <p style="text-align: center">
+                    <h:commandButton action="#{mbAlquileres.alquileresIns()}"
+                                     value="Grabar Datos"/>
+                </p>
+
+
+            </fieldset>
+
+            <!-- para errores de validación  -->
+            <!--<div id="msg_validacion"
+                 class="msg_error ui-state-highlight ui-corner-all">
+                <h:message for="idauto"/><br/>
+                <h:message for="alquiler_ini"/><br/>
+                <h:message for="cliente"/><br/>
+            </div>-->
+            
+            <div>
+                <p:messages id="msgs" />   
+            </div>
+        </h:form>
+
+        <!-- mensajes del servidor -->
+        <h:outputText id="msg_servidor" value="#{mbAlquileres.message}" 
+                      class="msg_error ui-state-highlight ui-corner-all"/>
+
+        <h:form style="text-align: center">
+            <h:commandLink value="Cancelar" action="/index" class="parainfo"/>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis.AlquileresMapper" >
+  <resultMap id="alquileres" type="dto.Alquileres" >
+    <id column="idalquiler" property="idalquiler" jdbcType="INTEGER" />
+    <result column="idauto" property="idauto" jdbcType="INTEGER" />
+    <result column="alquiler_ini" property="alquiler_ini" jdbcType="TIMESTAMP" />
+    <result column="alquiler_fin" property="alquiler_fin" jdbcType="TIMESTAMP" />
+    <result column="cliente" property="cliente" jdbcType="VARCHAR" />
+    <result column="dni" property="dni" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+</mapper>
